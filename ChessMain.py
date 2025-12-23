@@ -21,3 +21,25 @@ def load_images():
     for piece in pieces:
         IMAGES[piece] = pygame.transform.scale(pygame.image.load("images/" + piece + ".png"), (SQUARE_SIZE, SQUARE_SIZE))
     # NOTE: we can access an image by saying 'IMAGES["wP"]'
+
+def main():
+    pygame.init()
+
+    screen = pygame.display.set_mode((WIDTH, HEIGHT))
+    clock = pygame.time.Clock()
+
+    gamestate = ChessEngine.GameState()
+    load_images() # only call once
+
+    running = True
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+
+        clock.tick(MAX_FPS)
+
+        pygame.display.flip()
+
+if __name__ == "__main__":
+    main()
