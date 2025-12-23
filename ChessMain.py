@@ -48,7 +48,7 @@ Responsible for all the graphics within a current gamestate
 def draw_gamestate(screen, gamestate):
     draw_board(screen) # draws squares onto the board
     # add piece highlighting and move suggestions (later)
-    #draw_pieces(screen, gamestate.board) # draws pieces ontop of those squares (later)
+    draw_pieces(screen, gamestate.board) # draws pieces ontop of those squares
 
 """
 Draw the squares on the board. Top left is always light
@@ -59,6 +59,16 @@ def draw_board(screen):
         for col in range(DIMENSION):
             colour = colours[(row + col) % 2]
             pygame.draw.rect(screen, colour, pygame.Rect(col * SQUARE_SIZE, row * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE))
+
+"""
+Draw the pieces on the board using the current GameState.board
+"""
+def draw_pieces(screen, board):
+    for row in range(DIMENSION):
+        for col in range(DIMENSION):
+            piece = board[row][col]
+            if piece != "--": # not empty square
+                screen.blit(IMAGES[piece], (col * SQUARE_SIZE, row * SQUARE_SIZE))
 
 if __name__ == "__main__":
     main()
